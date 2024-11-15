@@ -1,0 +1,409 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    checksum/configuration: cef9ed611516ed35d43f528e7e1cd326ef886008615a27dc95e14507de15c644
+    checksum/passwords-secret: bdffde3f361e988d6ac54310e18090bc8cd453b34ba34f1dbe3dbcdab140160a
+  creationTimestamp: "2024-11-13T15:32:47Z"
+  generateName: kafka-controller-
+  labels:
+    app.kubernetes.io/component: controller-eligible
+    app.kubernetes.io/instance: kafka
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kafka
+    app.kubernetes.io/part-of: kafka
+    app.kubernetes.io/version: 3.9.0
+    apps.kubernetes.io/pod-index: "0"
+    controller-revision-hash: kafka-controller-7b9d5cff64
+    helm.sh/chart: kafka-31.0.0
+    statefulset.kubernetes.io/pod-name: kafka-controller-0
+  name: kafka-controller-0
+  namespace: kafka
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: kafka-controller
+    uid: 23780532-a7d3-4d80-bce1-34b7eef4f802
+  resourceVersion: "42141"
+  uid: e7695c6a-715d-4d91-967c-32672dc4682a
+spec:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/component: controller-eligible
+              app.kubernetes.io/instance: kafka
+              app.kubernetes.io/name: kafka
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  automountServiceAccountToken: true
+  containers:
+  - env:
+    - name: BITNAMI_DEBUG
+      value: "false"
+    - name: KAFKA_HEAP_OPTS
+      value: -Xmx1024m -Xms1024m
+    - name: KAFKA_KRAFT_CLUSTER_ID
+      valueFrom:
+        secretKeyRef:
+          key: kraft-cluster-id
+          name: kafka-kraft-cluster-id
+    - name: KAFKA_KRAFT_BOOTSTRAP_SCRAM_USERS
+      value: "true"
+    - name: KAFKA_CLIENT_USERS
+      value: user1
+    - name: KAFKA_CLIENT_PASSWORDS
+      valueFrom:
+        secretKeyRef:
+          key: client-passwords
+          name: kafka-user-passwords
+    - name: KAFKA_INTER_BROKER_USER
+      value: inter_broker_user
+    - name: KAFKA_INTER_BROKER_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: inter-broker-password
+          name: kafka-user-passwords
+    - name: KAFKA_CONTROLLER_USER
+      value: controller_user
+    - name: KAFKA_CONTROLLER_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: controller-password
+          name: kafka-user-passwords
+    image: docker.io/bitnami/kafka:3.9.0-debian-12-r1
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      exec:
+        command:
+        - pgrep
+        - -f
+        - kafka
+      failureThreshold: 3
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    name: kafka
+    ports:
+    - containerPort: 9093
+      name: controller
+      protocol: TCP
+    - containerPort: 9092
+      name: client
+      protocol: TCP
+    - containerPort: 9094
+      name: interbroker
+      protocol: TCP
+    - containerPort: 9095
+      name: external
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 6
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: controller
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: 750m
+        ephemeral-storage: 2Gi
+        memory: 768Mi
+      requests:
+        cpu: 500m
+        ephemeral-storage: 50Mi
+        memory: 512Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 1001
+      runAsNonRoot: true
+      runAsUser: 1001
+      seLinuxOptions: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /bitnami/kafka
+      name: data
+    - mountPath: /opt/bitnami/kafka/logs
+      name: logs
+    - mountPath: /opt/bitnami/kafka/config/server.properties
+      name: kafka-config
+      subPath: server.properties
+    - mountPath: /tmp
+      name: tmp
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-dddh4
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: kafka-controller-0
+  initContainers:
+  - command:
+    - /scripts/auto-discovery.sh
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: AUTODISCOVERY_SERVICE_TYPE
+      value: LoadBalancer
+    image: docker.io/bitnami/kubectl:1.31.2-debian-12-r6
+    imagePullPolicy: IfNotPresent
+    name: auto-discovery
+    resources:
+      limits:
+        cpu: 150m
+        ephemeral-storage: 2Gi
+        memory: 192Mi
+      requests:
+        cpu: 100m
+        ephemeral-storage: 50Mi
+        memory: 128Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 1001
+      runAsNonRoot: true
+      runAsUser: 1001
+      seLinuxOptions: {}
+      seccompProfile:
+        type: RuntimeDefault
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /scripts/auto-discovery.sh
+      name: scripts
+      subPath: auto-discovery.sh
+    - mountPath: /shared
+      name: kafka-autodiscovery-shared
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-dddh4
+      readOnly: true
+  - args:
+    - -ec
+    - |
+      /scripts/kafka-init.sh
+    command:
+    - /bin/bash
+    env:
+    - name: BITNAMI_DEBUG
+      value: "false"
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: KAFKA_VOLUME_DIR
+      value: /bitnami/kafka
+    - name: KAFKA_MIN_ID
+      value: "0"
+    - name: EXTERNAL_ACCESS_ENABLED
+      value: "true"
+    - name: EXTERNAL_ACCESS_PORT
+      value: "9094"
+    - name: KAFKA_CLIENT_USERS
+      value: user1
+    - name: KAFKA_CLIENT_PASSWORDS
+      valueFrom:
+        secretKeyRef:
+          key: client-passwords
+          name: kafka-user-passwords
+    - name: KAFKA_INTER_BROKER_USER
+      value: inter_broker_user
+    - name: KAFKA_INTER_BROKER_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: inter-broker-password
+          name: kafka-user-passwords
+    - name: KAFKA_CONTROLLER_USER
+      value: controller_user
+    - name: KAFKA_CONTROLLER_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: controller-password
+          name: kafka-user-passwords
+    image: docker.io/bitnami/kafka:3.9.0-debian-12-r1
+    imagePullPolicy: IfNotPresent
+    name: kafka-init
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 1001
+      runAsNonRoot: true
+      runAsUser: 1001
+      seLinuxOptions: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /bitnami/kafka
+      name: data
+    - mountPath: /config
+      name: kafka-config
+    - mountPath: /configmaps
+      name: kafka-configmaps
+    - mountPath: /secret-config
+      name: kafka-secret-config
+    - mountPath: /scripts
+      name: scripts
+    - mountPath: /tmp
+      name: tmp
+    - mountPath: /shared
+      name: kafka-autodiscovery-shared
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-dddh4
+      readOnly: true
+  nodeName: gke-kafka-cluster-default-pool-165b5f64-2mlw
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1001
+    fsGroupChangePolicy: Always
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: kafka
+  serviceAccountName: kafka
+  subdomain: kafka-controller-headless
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: data-kafka-controller-0
+  - configMap:
+      defaultMode: 420
+      name: kafka-controller-configuration
+    name: kafka-configmaps
+  - emptyDir: {}
+    name: kafka-secret-config
+  - emptyDir: {}
+    name: kafka-config
+  - emptyDir: {}
+    name: tmp
+  - configMap:
+      defaultMode: 493
+      name: kafka-scripts
+    name: scripts
+  - emptyDir: {}
+    name: kafka-autodiscovery-shared
+  - emptyDir: {}
+    name: logs
+  - name: kube-api-access-dddh4
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-11-13T15:33:10Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-11-13T15:34:18Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-11-13T15:34:38Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-11-13T15:34:38Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-11-13T15:32:52Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://2d0fa0d0114855d7cec8bc32729cc68508dd0125a0070e3c741d1579b836fb28
+    image: docker.io/bitnami/kafka:3.9.0-debian-12-r1
+    imageID: docker.io/bitnami/kafka@sha256:9b38734577ac16445cc49db93f41a8f7effca24aa9cbcdd798edbdbb418e0601
+    lastState: {}
+    name: kafka
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-11-13T15:34:18Z"
+  hostIP: 10.160.0.26
+  hostIPs:
+  - ip: 10.160.0.26
+  initContainerStatuses:
+  - containerID: containerd://cf487d78febfba333383c67b73be50d8f5370b62c52a4fa28c3256e7e70ef703
+    image: docker.io/bitnami/kubectl:1.31.2-debian-12-r6
+    imageID: docker.io/bitnami/kubectl@sha256:0eab9ec8f5e0f75271277467ebb7513b36dea0122bc68615d18c47fece4fd82c
+    lastState: {}
+    name: auto-discovery
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://cf487d78febfba333383c67b73be50d8f5370b62c52a4fa28c3256e7e70ef703
+        exitCode: 0
+        finishedAt: "2024-11-13T15:33:51Z"
+        reason: Completed
+        startedAt: "2024-11-13T15:33:10Z"
+  - containerID: containerd://192782e8004cfdf087691df56fe9a16940409a9f022099b73a98b69d1518bd68
+    image: docker.io/bitnami/kafka:3.9.0-debian-12-r1
+    imageID: docker.io/bitnami/kafka@sha256:9b38734577ac16445cc49db93f41a8f7effca24aa9cbcdd798edbdbb418e0601
+    lastState: {}
+    name: kafka-init
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://192782e8004cfdf087691df56fe9a16940409a9f022099b73a98b69d1518bd68
+        exitCode: 0
+        finishedAt: "2024-11-13T15:34:12Z"
+        reason: Completed
+        startedAt: "2024-11-13T15:34:12Z"
+  phase: Running
+  podIP: 10.48.2.4
+  podIPs:
+  - ip: 10.48.2.4
+  qosClass: Burstable
+  startTime: "2024-11-13T15:32:52Z"

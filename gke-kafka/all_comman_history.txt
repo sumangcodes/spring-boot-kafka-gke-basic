@@ -1,0 +1,500 @@
+   17  [2024-11-12 16:24:08,646] INFO [Controller id=1003, targetBrokerId=1003] Client r
+   18  kubectl get pods -n kafka
+   19  kubectl exec -it kafka-client --namespace=kafka -- nc -zv kafka-svc 9092
+   20  kubectl exec -it kafka-client --namespace=kafka -- kafka-topics --create --topic test-topic --bootstrap-server kafka-svc:9092 --partitions 3 --replication-factor 1
+   21  kubectl logs kafka-client -n kafka
+   22  kubectl logs kafka-client -n kafka
+   23  kubectl get statefulsets -n kafka
+   24  kubectl describe statefulset kafka-controler -o yaml > kafka-controller-statefullset.yaml
+   25  kubectl describe statefulset kafka-controler -o yaml > kafka-controller-statefullset.yaml
+   26  kubectl get statefulset kafka-controller -n kafka -o yaml > kafka-controller-statefulset.yaml
+   27  vim /opt/bitnami/kafka/config/server.properties
+   28  kubectl exec -it kafka-0 -n kafka -- /bin/bash
+   29  kubectl get pods -n kafka
+   30  kubectl exec -it kafka-controller-0 -n kafka -- /bin/bash
+   31  kubectl get configmaps -n kafka
+   32  kubectl get configmaps kafka-controller-configuration  -n kafka -o yaml > kafka-controller-config-map.yaml
+   33  kubectl get svc -n kafka
+   34  ls
+   35  kubectl exec -it kafka-controller-0 -n kafka -- /bin/bash
+   36  kubectl get svc -n kafka
+   37  kubectl exec -it kafka-controller-0 -n kafka -- /bin/bash
+   38  kubectl apply -f kafka-controller-config-map.yaml -n kafka
+   39  kubectl exec -it kafka-controller-0 -n kafka -- /bin/bash
+   40  kubectl apply -f kafka-controller-config-map.yaml -n kafka
+   41  kubectl get configmaps kafka-controller-configuration  -n kafka -o yaml > kafka-controller-config-map.yaml
+   42  kubectl apply -f kafka-controller-config-map.yaml -n kafka
+   43  clear
+   44  kubectl exec -it kafka-controller-0 -n kafka -- /bin/bash
+   45  kubectl run kafka-client --image=confluentinc/cp-kafka:latest --namespace=kafka --command -- sleep infinity
+   46  kubectl exec -it kafka-client --namespace=kafka -- /bin/bash -c 'echo "request.timeout.ms=60000" > /tmp/client-config.properties && echo "session.timeout.ms=30000" >> /tmp/client-config.properties && echo "sasl.mechanism=PLAIN" >> /tmp/client-config.properties && echo "security.protocol=SASL_PLAINTEXT" >> /tmp/client-config.properties && echo "sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username=\"your_username\" password=\"your_password\";" >> /tmp/client-config.properties'
+   47  kubectl exec -it kafka-client --namespace=kafka -- kafka-topics --create --topic test-topic --bootstrap-server kafka-svc:9092 --partitions 3 --replication-factor 1 --command-config /tmp/client-config.properties
+   48  helm upgrade --install kafka bitnami/kafka -f values.yaml
+   49  cccc
+   50  helm upgrade --install kafka bitnami/kafka -f values.yaml -n kafka
+   51  kubectl exec -it kafka -- bash
+   52  kubectl get pods -n kafka
+   53  kubectl exec -it <kafka-controller-0 -- bash
+   54  kubectl exec -it kafka-controller-0 -- bash
+   55  kubectl exec -it kafka-controller-0 -- bash -n kafka
+   56  kubectl exec -it kafka-controller-0 -- bash -n kafka
+   57  kubectl exec -it kafka-controller-0 -- bash -n kafka
+   58  helm history kafka --namespace kafka
+   59  helm repo add kafdrop https://github.com/obsidiandynamics/kafdrop
+   60  helm repo add kafdrop https://kafdrop.github.io/kafdrop/
+   61  helm repo update
+   62  helm install kafdrop bitnami/kafdrop   --set "kafkaBrokers=kafka-controller-0.kafka.kafka.svc.cluster.local:9092"   --namespace kafka
+   63  helm search repo kafdrop
+   64  helm repo add kafdrop https://kafdrop.github.io/kafdrop/
+   65  helm repo add kafdrop https://github.com/obsidiandynamics/kafdrop
+   66  helm repo add kafdrop https://obsidiandynamics.github.io/kafdrop/charts
+   67  helm repo add kafdrop https://obsidiandynamics.github.io/kafdrop/charts
+   68  cd /mnt
+   69  cd c
+   70  cd User
+   71  cd Users
+   72  cd ciphe/Projects/gke-kafka/
+   73  code .
+   74  curl -X POST "http://localhost:8080/api/kafka/publish?message=HelloKafka"
+   75  curl http://localhost:8080/api/kafka/consume
+   76  cd :/mnt/c/Users/ciphe/Projects/gke-kafka/spring-kafka-example/k8s
+   77  cd /mnt/c/Users/ciphe/Projects/gke-kafka/spring-kafka-example/k8s
+   78  kubectl get pods -n kafka
+   79  kubectl logs kafka-spring-app-74b7447b85-rgv5g -n kafka
+   80  cd ..
+   81  ./mvnw clean install
+   82  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+   83  ./mvnw clean package
+   84  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean pacakge
+   85  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean package
+   86  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+   87  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+   88  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+   89  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+   90  clear
+   91  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+   92  cd /mnt
+   93  cd c
+   94  cd Users/
+   95  cd ciphe/
+   96  ls
+   97  cd Projects/
+   98  ls
+   99  cd gke-kafka/
+  100  ls
+  101  code .
+  102  gcloud services enable compute.googleapis.com iam.googleapis.com container.googleapis.com gkebackup.googleapis.com cloudresourcemanager.googleapis.com
+  103  clear
+  104  gcloud projects add-iam-policy-binding kafka-demo-441512 --member="user:sumang.codes@gmail.com" --role=roles/storage.objectViewer
+  105  gcloud projects add-iam-policy-binding kafka-demo-441512 --member="user:sumang.codes@gmail.com" --role=roles/logging.logWriter
+  106  gcloud projects add-iam-policy-binding kafka-demo-441512 --member="user:sumang.codes@gmail.com" --role=roles/container.clusterAdmin
+  107  gcloud projects add-iam-policy-binding kafka-demo-441512 --member="user:sumang.codes@gmail.com" --role=roles/container.serviceAgent
+  108  gcloud projects add-iam-policy-binding kafka-demo-441512 --member="user:sumang.codes@gmail.com" --role=roles/iam.serviceAccountAdmin
+  109  gcloud projects add-iam-policy-binding kafka-demo-441512 --member="user:sumang.codes@gmail.com" --role=roles/serviceusage.serviceUsageAdmin
+  110  gcloud projects add-iam-policy-binding kafka-demo-441512 --member="user:sumang.codes@gmail.com" --role=roles/iam.serviceAccountAdmin
+  111  export PROJECT_ID=kafka-demo-441512
+  112  export KUBERNETES_CLUSTER_PREFIX=kafka
+  113  export REGION=us-central1
+  114  git clone https://github.com/GoogleCloudPlatform/kubernetes-engine-samples
+  115  sudo apt update
+  116  sudo apt install git
+  117  git clone https://github.com/GoogleCloudPlatform/kubernetes-engine-samples
+  118  cd kubernetes-engine-samples/streaming/
+  119  clear
+  120  export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
+  121  terraform -chdir=kafka/terraform/gke-standard init
+  122  terraform -chdir=kafka/terraform/gke-standard apply -var project_id=${PROJECT_ID}   -var region=${REGION}   -var cluster_prefix=${KUBERNETES_CLUSTER_PREFIX}
+  123  sudo apt update
+  124  sudo apt install terraform
+  125  curl https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor > /etc/apt/trusted.gpg.d/hashicorp-archive-keyring.gpg
+  126  sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  127  sudo apt install lsb-release
+  128  sudo apt install software-properties-common
+  129  curl https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor > /etc/apt/trusted.gpg.d/hashicorp-archive-keyring.gpg
+  130  sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  131  sudo apt install terraform
+  132  export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
+  133  terraform -chdir=kafka/terraform/gke-standard init
+  134  terraform -chdir=kafka/terraform/gke-standard apply -var project_id=${PROJECT_ID}   -var region=${REGION}   -var cluster_prefix=${KUBERNETES_CLUSTER_PREFIX}
+  135  terraform -chdir=kafka/terraform/gke-standard apply -var project_id=${PROJECT_ID}   -var region=${REGION}   -var cluster_prefix=${KUBERNETES_CLUSTER_PREFIX}
+  136  terraform -chdir=kafka/terraform/gke-standard apply -var project_id=${PROJECT_ID}   -var region=${REGION}   -var cluster_prefix=${KUBERNETES_CLUSTER_PREFIX}
+  137  terraform -chdir=kafka/terraform/gke-standard apply -var project_id=${PROJECT_ID}   -var region=${REGION}   -var cluster_prefix=${KUBERNETES_CLUSTER_PREFIX}
+  138  ls
+  139  vim gke-stateful-kafka/
+  140  ls
+  141  terraform -chdir=kafka/terraform/gke-standard apply -var project_id=${PROJECT_ID}   -var region=${REGION}   -var cluster_prefix=${KUBERNETES_CLUSTER_PREFIX}
+  142  terraform -chdir=kafka/terraform/gke-standard init
+  143  terraform -chdir=kafka/terraform/gke-standard apply -var project_id=${PROJECT_ID} -var region=${REGION} -var cluster_prefix=${KUBERNETES_CLUSTER_PREFIX}
+  144  ls
+  145  cd kafka
+  146  ls
+  147  cd terraform/
+  148  ls
+  149  cd modules/
+  150  ls
+  151  vim cluster
+  152  cd ..
+  153  ls
+  154  cd gke-standard/
+  155  ls
+  156  terraform -chdir=kafka/terraform/gke-standard apply -var project_id=${PROJECT_ID} -var region=${REGION} -var cluster_prefix=${KUBERNETES_CLUSTER_PREFIX}
+  157  cd ..
+  158  cd ..
+  159  cd ..
+  160  terraform -chdir=kafka/terraform/gke-standard apply -var project_id=${PROJECT_ID} -var region=${REGION} -var cluster_prefix=${KUBERNETES_CLUSTER_PREFIX}
+  161  cd ..
+  162  cd ..
+  163  ls
+  164  gcloud container clusters create kafka-cluster --region asia-south1 --num-nodes=2 --machine-type=e2-standard-2 --disk-type=pd-standard --disk-size=100GB
+  165  gcloud container clusters get-credentials kafka-cluster --region asia-south1 --project kafka-demo-441512
+  166  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  167  helm repo add kafka-ui https://provectuslabs.github.io/helm-charts
+  168  helm repo update
+  169  kubectl create namespace kafka
+  170  helm install my-kafka bitnami/kafka --set zookeeper.enabled=true -n kafka
+  171  helm install my-kafka bitnami/kafka --set zookeeper.enabled=true
+  172  helm install my-kafka bitnami/kafka --set zookeeper.enabled=true --set kraft.enabled=false -n kafka
+  173  clear
+  174  helm repo add bitnami https://charts.bitnami.com/bitnami
+  175  helm repo update
+  176  helm install zookeeper bitnami/zookeeper --namespace kafka --set replicaCount=3
+  177  helm install kafka bitnami/kafka --namespace kafka   --set zookeeper.enabled=false   --set replicaCount=3   --set externalAccess.enabled=true   --set externalAccess.service.type=LoadBalancer   --set externalAccess.service.port=9092   --set externalAccess.autoDiscovery.enabled=true   --set auth.enabled=false   --set zookeeper.hosts=zookeeper
+  178  helm install kafka bitnami/kafka --namespace kafka   --set zookeeper.enabled=false   --set replicaCount=3   --set externalAccess.enabled=true   --set externalAccess.service.type=LoadBalancer   --set externalAccess.service.port=9092   --set externalAccess.autoDiscovery.enabled=true   --set auth.enabled=false   --set zookeeper.hosts=zookeeper   --set rbac.create=true   --set controller.automountServiceAccountToken=true   --set broker.automountServiceAccountToken=true
+  179  helm repo add kafka-ui https://provectus.github.io/kafka-ui
+  180  helm repo add bitnami https://charts.bitnami.com/bitnami
+  181  helm repo update
+  182  helm install kafka-ui bitnami/kafka-ui --namespace kafka   --set kafka.bootstrapServers=kafka.kafka.svc.cluster.local:9092   --set service.type=LoadBalancer
+  183  cd kafka-demo/
+  184  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  185  kubectl get pods -n kafka
+  186  kubectl apply -f kafka-ui-service.yaml -n kafka
+  187  kubectl get svc -n kafka
+  188  kubectl get svc -n kafka
+  189  kubectl run -it --rm test-pod --image=alpine --namespace=kafka -- sh
+  190  telnet kafka.kafka.svc.cluster.local 9092
+  191  kubectl get svc kafka -o yaml > kafka-service.yaml
+  192  kubectl get svc kafka -o yaml > kafka-service.yaml -n kafka
+  193  kubectl get pods -n kafka
+  194  kubectl get pods kafka-controller-0  -n kafka -o yaml > kafka-deployment.yaml
+  195  kubectl get svc -n kafka
+  196  kubectl get pods -n kafka
+  197  kubectl get svc -n kafka
+  198  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  199  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  200  kubectl get pods -n kafka
+  201  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  202  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  203  kubectl get svc -n kafka
+  204  kubectl get svc kafka  -n kafka  -o yaml > kafka-service.yaml
+  205  kubectl delete -f kafka-service.yaml -n kafka
+  206  kubectl get svc -n kafka
+  207  kubectl apply -f kafka-service.yaml -n kafka
+  208  kubectl apply -f kafka-service.yaml -n kafka
+  209  kubectl get svc -n kafka
+  210  kubectl get svc -n kafka
+  211  kubectl get svc -n kafka
+  212  kubectl get svc -n kafka
+  213  kubectl delete -f kafka-ui -n kafka
+  214  kubectl get pods -n kafka
+  215  kubectl delete pod kafka-ui-579df864df-b8txw -n kafka
+  216  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  217  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  218  kubectl get pods -n kafka
+  219  kubectl get pods -n kafka
+  220  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  221  kubectl get pods -n kafka
+  222  kubectl get svc -n kafka
+  223  kubectl get svc kafka-controller-0-external  -n kafka -o yaml > kafka-controller-external-service.yaml
+  224  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  225  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  226  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  227  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  228  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  229  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  230  kubectl get pods -n kafka
+  231  kubectl get pods -n kafka
+  232  kubectl exec -it kafka-controller-0 -- /bin/bash
+  233  kubectl exec -it kafka-controller-0 -- /bin/bash -n kafka
+  234  kubectl get pods -n kafka
+  235  '
+  236  kubectl exec -it kafka-controller-0 -- /bin/bash
+  237  kubectl exec -it kafka-controller-0 -- /bin/bash -n kafka
+  238  kubectl logs kafka-controller-0 -n kafka
+  239  kubectl get configmaps -n kafka
+  240  kubectl get configmaps kafka-controller-configuration -n kafka -o yaml > kafka-controller-configuration.yaml
+  241  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  242  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  243  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  244  kubectl logs kafka-controller-0 -n kafka
+  245  date
+  246  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  247  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  248  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  249  kubectl logs kafka-controller-0 -n kafka
+  250  kubectl get svc -n kafka
+  251  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  252  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  253  kubectl logs kafka-controller-2 -n kafka
+  254  kubectl logs kafka-controller-1 -n kafka
+  255  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  256  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  257  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  258  kubectl get pods -n kafka
+  259  kubectl get configmaps kafka-controller-configuration -n kafka -o yaml > kafka-controller-configuration.yaml
+  260  gcloud container clusters get-credentials kafka-cluster --region asia-south1 --project kafka-demo-441512
+  261  kubectl get configmaps kafka-controller-configuration -n kafka -o yaml > kafka-controller-configuration.yaml
+  262  kubectl apply -f kafka-controller-configuration.yaml  -n kafka
+  263  kubectl get pods -n kafka
+  264  kubectl describe pod kafka-controller-0 -n kafka
+  265  kubectl restart pod  -l app.kubernetes.io/instance=kafka
+  266  kubectl rollout restart deployment -l app.kubernetes.io/instance=kafka
+  267  kubectl rollout restart deployment -l app.kubernetes.io/instance=kafka  -n kafka
+  268  kubectl rollout restart deployment -l app.kubernetes.io/name=kafka  -n kafka
+  269  kubectl describe pod kafka-controller-0 -n kafka -o yaml > kafka-deployment.yaml
+  270  kubectl get pod kafka-controller-0 -n kafka -o yaml > kafka-deployment.yaml
+  271  kubectl get client-passwords -n kafka
+  272  kubectl get secret kafka-user-passwords -o yaml -n <namespace>
+  273  kubectl get secret kafka-user-passwords -o yaml -n kafka
+  274  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  275  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  276  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  277  kubectl get pods -n kafka
+  278  kubectl log kafka-ui-55ffdf869f-sh7mj -n kafka
+  279  kubectl logs kafka-ui-55ffdf869f-sh7mj -n kafka
+  280  kubectl describe pod kafka-ui-55ffdf869f-sh7mj -n kafka
+  281  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  282  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  283  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  284  kubectl get pods -n kafka
+  285  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  286  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  287  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  288  kubectl get pods -n kafka
+  289  kubectl get secret kafka-user-passwords -n kafka -o yaml > kafka-user-passwords.yaml
+  290  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  291  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  292  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  293  kubectl get pods -n kafka
+  294  kubectl get pods -n kafka
+  295  kubectl logs kafka-controller-0 -n kafka
+  296  kubectl get configmaps kafka-controller-configuration -n kafka -o yaml > kafka-controller-configuration.yaml
+  297  kubectl get pods -n kafka
+  298  kubectl logs kafka-ui-5c76787f5c-nw8wl -n kafka
+  299  kubectl logs kafka-ui-5c76787f5c-nw8wl -n kafka >  kafka-ui.log
+  300  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  301  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  302  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  303  kubectl get pods -n kafka
+  304  kubectl logs kafka-ui-5c79dc7664-cg5zv -n kafka
+  305  kubectl logs kafka-controller-0 -n kafka
+  306  sudo apt-get install kafka
+  307  docker run -it --rm confluentinc/cp-kafka:latest bash
+  308  docker run -it --rm confluentinc/cp-kafka:latest bash
+  309  wget https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz
+  310  wget https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
+  311  tar xzf kafka_2.13-3.2.0.tgz
+  312  ls
+  313  tar xzf kafka_2.13-3.9.0.tgz
+  314  ls
+  315  cd kafka_2.13-3.9.0
+  316  ls
+  317  cd bin
+  318  ls
+  319  vim client.properties
+  320  vim client.properties
+  321  kubectl get secret kafka-user-passwords -n kafka -o yaml > kafka-user-passwords.yaml
+  322  echo QU9pVDg4YkNUQg==  | base64 --decode
+  323  vim client.properties
+  324  kafka-topics.sh --list --bootstrap-server kafka.kafka.svc.cluster.local:9092 --command-config client.properties
+  325  ls
+  326  sh kafka-topics.sh --list --bootstrap-server kafka.kafka.svc.cluster.local:9092 --command-config client.properties
+  327  kubectl get svc -n kafka
+  328  sh kafka-topics.sh --list --bootstrap-server 34.93.22.146:9092 --command-config client.properties
+  329  kubectl get svc -n kafka
+  330  vim kafka-topics.sh 
+  331  sh kafka-topics.sh --list --bootstrap-server 34.93.22.146:9095 --command-config client.properties
+  332  sh kafka-topics.sh --create   --bootstrap-server 34.93.22.146:9095   --command-config client.properties   --topic sumantopic   --partitions 3   --replication-factor 1
+  333  vim kafka-topics.sh 
+  334  vim client.properties
+  335  echo QU9pVDg4YkNUQg==  | base64 --decode
+  336  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  337  cd ..
+  338  cd ..
+  339  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  340  kubectl delete -f kafka-ui-deployment.yaml -n kafka
+  341  kubectl apply -f kafka-ui-deployment.yaml -n kafka
+  342  kubectl get pods -n kafka
+  343  ls
+  344  cd kafka_2.13-3.9.0
+  345  ls
+  346  cd bin
+  347  sh kafka-topics.sh --list --bootstrap-server 34.93.22.146:9095 --command-config client.properties
+  348  kubectl get pods -n kafka
+  349  kubectl logs apiVersion: apps/v1
+  350  kind: Deployment
+  351  metadata:
+  352    name: kafka-ui
+  353    namespace: kafka
+  354  spec:
+  355    replicas: 1
+  356    selector:
+  357      matchLabels:
+  358        app: kafka-ui
+  359    template:
+  360      metadata:
+  361        labels:
+  362          app: kafka-ui
+  363      spec:
+  364        containers:
+  365          - name: kafka-ui
+  366            image: provectuslabs/kafka-ui:latest
+  367            ports:
+  368              - containerPort: 8080
+  369            env:
+  370              - name: KAFKA_CLUSTERS_0_NAME
+  371                value: "my-cluster"
+  372              - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
+  373                value: "34.93.22.146:9095"
+  374              - name: KAFKA_CLUSTERS_0_SASL_MECHANISM
+  375                value: "PLAIN"  # Change to SCRAM-SHA-256 or SCRAM-SHA-512 if needed
+  376              - name: KAFKA_CLUSTERS_0_SASL_USERNAME
+  377                value: "user1"  # SASL username (ensure this matches Kafka config)
+  378              - name: KAFKA_CLUSTERS_0_SASL_PASSWORD
+  379                value: "AOiT88bCTB"  # SASL password (ensure this matches Kafka config)
+  380  lear
+  381  clear
+  382  kubectl get pods -n kafka
+  383  kubectl logs kafka-ui-8c7b76946-ttcc9 -n kafka
+  384  kubectl get pods -n kafka
+  385  kubectl logs kafka-controller-0 -n kafka
+  386  clear
+  387  kubectl logs kafka-controller-0 -n kafka --tail=100
+  388  kafka-topics.sh --list   --bootstrap-server 34.93.22.146:9095   --command-config client.properties
+  389  sh kafka-topics.sh --list   --bootstrap-server 34.93.22.146:9095   --command-config client.properties
+  390  cd ..
+  391  cd ..
+  392  cd ..
+  393  ls
+  394  spring init --dependencies=web,kafka --java-version=17 spring-kafka-example
+  395  cd spring-kafka-example/
+  396  ls
+  397  cd ..
+  398  rm -f spring-kafka-example/*
+  399  rm -f spring-kafka-example
+  400  rm -rf spring-kafka-example
+  401  ls
+  402  spring init --dependencies=web,kafka --build=maven --java-version=11 spring-kafka-example
+  403  cd spring-kafka-example/
+  404  ls
+  405  cd ..
+  406  cd spring-kafka-example/
+  407  ./mvnw clean install
+  408  ./mvnw clean package
+  409  ./mvnw clean install
+  410  ./mvnw clean install
+  411  ./mvnw clean package
+  412  docker build -t gcr.io/kafka-demo-441512/spring-kafka-example:latest .
+  413  docker push gcr.io/kafka-demo-441512/spring-kafka-example:latest
+  414  cd k8s/
+  415  kubectl apply -f kafka-secret.yaml -n kafka
+  416  kubectl apply -f kafka-secret.yaml -n kafka
+  417  echo -n 'user1' | base64
+  418  echo -n 'AOiT88bCTB' | base64
+  419  kubectl apply -f kafka-secret.yaml -n kafka
+  420  kubectl apply -f kafka-configmap.yaml  -n kafka
+  421  kubectl apply -f kafka-spring-app-deployment.yaml  -n kafka
+  422  kubectl get pods -n kafka
+  423  kubectl get pods -n kafka
+  424  kubectl port-forward deployment/kafka-spring-app 8080:8080 -n kafka
+  425  cd ..
+  426  docker build -t gcr.io/kafka-demo-441512/spring-kafka-example:latest .
+  427  docker build -t gcr.io/kafka-demo-441512/spring-kafka-example:latest .
+  428  curl -X POST "http://localhost:8080/api/kafka/publish?message=HelloKafka"
+  429  kubectl logs kafka-spring-app-74b7447b85-db8wk
+  430  kubectl logs kafka-spring-app-74b7447b85-db8wk -n kafka
+  431  lear
+  432  clear
+  433  curl -X POST "http://localhost:8080/api/kafka/publish?message=HelloKafka"
+  434  curl -X POST "http://localhost:8080/api/kafka/publish?message=HelloKafka"
+  435  curl -X POST "http://localhost:8080/api/kafka/publish?message=HelloKafka"
+  436  curl http://localhost:8080/api/kafka/consume
+  437  curl -X POST "http://localhost:8080/api/kafka/publish?message=HelloKafka"
+  438  cd /mnt
+  439  cd c
+  440  cd Users/
+  441  cd ciphe/
+  442  cd Projects/
+  443  ls
+  444  cd gke-kafka/
+  445  ls
+  446  cd spring-kafka-example/
+  447  ls
+  448  ./mvnw clean install
+  449  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  450  cd ..
+  451  code .
+  452  ./mvnw clean install
+  453  cd spring-kafka-example/
+  454  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 \
+  455  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  456  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  457  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  458  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  459  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  460  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  461  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  462  clear
+  463  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  464  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install -X
+  465  clear
+  466  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install -DskipTests -X
+  467  clear
+  468  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install -DskipTests
+  469  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install
+  470  clear
+  471  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install -DskipTests=true
+  472  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean package -DskipTests=true
+  473  docker build -t gcr.io/kafka-demo-441512/spring-kafka-example:latest .
+  474  docker build -t gcr.io/kafka-demo-441512/spring-kafka-example:latest .
+  475  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean install -DskipTests=true
+  476  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean package -DskipTests=true
+  477  docker build -t gcr.io/kafka-demo-441512/spring-kafka-example:latest .
+  478  docker push gcr.io/kafka-demo-441512/spring-kafka-example:latest
+  479  kubectl get pods -n kafka
+  480  cd k8s/
+  481  kubectl delete -f kafka-spring-app-deployment.yaml -n kafka
+  482  kubectl get pods -n kafka
+  483  kubectl apply -f kafka-spring-app-deployment.yaml -n kafka
+  484  kubectl get pods -n kafka
+  485  kubectl get pods -n kafka
+  486  kubectl port-forward kafka-spring-app-74b7447b85-db8wk  8080:8080 -n kafka
+  487  cd ..
+  488  KAFKA_BOOTSTRAP_SERVERS=34.93.22.146:9095 KAFKA_USERNAME=user1 KAFKA_PASSWORD=AOiT88bCTB ./mvnw clean package -DskipTests=true
+  489  docker build -t gcr.io/kafka-demo-441512/spring-kafka-example:latest .
+  490  docker push gcr.io/kafka-demo-441512/spring-kafka-example:latest
+  491  cd k8s/
+  492  kubectl delete -f kafka-spring-app-deployment.yaml -n kafka
+  493  kubectl apply -f kafka-spring-app-deployment.yaml -n kafka
+  494  kubectl get pods -n kafka
+  495  kubectl get pods -n kafka
+  496  kubectl port-forward kafka-spring-app-74b7447b85-db8wk  8080:8080 -n kafka
+  497  kubectl port-forward kafka-spring-app-74b7447b85-x4lxb  8080:8080 -n kafka
+  498  kubectl port-forward kafka-spring-app-74b7447b85-x4lxb  8080:8080 -n kafka
+  499  cd /mnt
+  500  kafka-topics.sh --bootstrap-server <your-broker>:9095 --list
+  501  history
+  502  history  > all_comman_history.txt
+  503  ls
+  504  vim all_comman_history.txt 
+  505  cd C
+  506  cd c
+  507  ls
+  508  cd Users
+  509  cd ciphe/
+  510  ls
+  511  ls
+  512  cd Projects/
+  513  ls
+  514  cd gke-kafka/
+  515  ls
+  516  history  > all_comman_history.txt

@@ -1,0 +1,50 @@
+apiVersion: v1
+data:
+  server.properties: |-
+    # Kafka listener configurations
+    listeners=CLIENT://:9092,INTERNAL://:9094,EXTERNAL://:9095,CONTROLLER://:9093
+    advertised.listeners=CLIENT://advertised-address:9092,INTERNAL://advertised-address:9094
+    listener.security.protocol.map=CLIENT:SASL_PLAINTEXT,INTERNAL:SASL_PLAINTEXT,CONTROLLER:SASL_PLAINTEXT,EXTERNAL:SASL_PLAINTEXT
+
+    # KRaft mode settings for controller and broker roles
+    process.roles=controller,broker
+    controller.listener.names=CONTROLLER
+    controller.quorum.voters=0@kafka-controller-0:9093,1@kafka-controller-1:9093
+
+    # Authentication settings for controller using SASL
+    sasl.mechanism.controller.protocol=PLAIN
+    listener.name.controller.sasl.enabled.mechanisms=PLAIN
+    listener.name.controller.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="controller_user" password="controller-password";
+
+    # Kafka log directories
+    log.dir=/bitnami/kafka/data
+    logs.dir=/opt/bitnami/kafka/logs
+
+    # Interbroker communication settings
+    inter.broker.listener.name=INTERNAL
+    sasl.mechanism.inter.broker.protocol=PLAIN
+
+    # SASL configurations for different listeners (client, internal, external)
+    listener.name.client.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required user_user1="password";
+    listener.name.internal.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="inter_broker_user" password="interbroker-password";
+    listener.name.external.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required user_user1="password";
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"server.properties":"# Kafka listener configurations\nlisteners=CLIENT://:9092,INTERNAL://:9094,EXTERNAL://:9095,CONTROLLER://:9093\nadvertised.listeners=CLIENT://advertised-address:9092,INTERNAL://advertised-address:9094\nlistener.security.protocol.map=CLIENT:SASL_PLAINTEXT,INTERNAL:SASL_PLAINTEXT,CONTROLLER:SASL_PLAINTEXT,EXTERNAL:SASL_PLAINTEXT\n\n# KRaft mode settings for controller and broker roles\nprocess.roles=controller,broker\ncontroller.listener.names=CONTROLLER\ncontroller.quorum.voters=0@kafka-controller-0:9093,1@kafka-controller-1:9093\n\n# Authentication settings for controller using SASL\nsasl.mechanism.controller.protocol=PLAIN\nlistener.name.controller.sasl.enabled.mechanisms=PLAIN\nlistener.name.controller.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username=\"controller_user\" password=\"controller-password\";\n\n# Kafka log directories\nlog.dir=/bitnami/kafka/data\nlogs.dir=/opt/bitnami/kafka/logs\n\n# Interbroker communication settings\ninter.broker.listener.name=INTERNAL\nsasl.mechanism.inter.broker.protocol=PLAIN\n\n# SASL configurations for different listeners (client, internal, external)\nlistener.name.client.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required user_user1=\"password\";\nlistener.name.internal.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username=\"inter_broker_user\" password=\"interbroker-password\";\nlistener.name.external.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required user_user1=\"password\";"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"kafka-controller-configuration","namespace":"kafka"}}
+    meta.helm.sh/release-name: kafka
+    meta.helm.sh/release-namespace: kafka
+  creationTimestamp: "2024-11-13T15:32:46Z"
+  labels:
+    app.kubernetes.io/component: controller-eligible
+    app.kubernetes.io/instance: kafka
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kafka
+    app.kubernetes.io/part-of: kafka
+    app.kubernetes.io/version: 3.9.0
+    helm.sh/chart: kafka-31.0.0
+  name: kafka-controller-configuration
+  namespace: kafka
+  resourceVersion: "152427"
+  uid: 67294ed4-cf18-4e22-8a4d-1c70dffef37d
